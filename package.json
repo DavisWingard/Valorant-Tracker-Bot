@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  },
+  "name": "valorant-tracker-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.20"
+  },
+  "description": "",
+  "type": "module"
+}
