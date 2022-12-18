@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
-dotenv.config();
+import { Client, GatewayIntentBits, REST, Routes } from "discord.js";
 
-import { Client, GatewayIntentBits } from "discord.js";
+dotenv.config();
 
 const client = new Client({
     intents: [
@@ -10,13 +10,35 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
     ]
 });
-client.login(process.env.TOKEN);
+
+const TOKEN = process.env.TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
+
+client.login(TOKEN);
 
 client.on("ready", () => {
     console.log(`${client.user.tag} has logged in`);
 });
 
-client.on("messageCreate", (message) => {
-    console.log(message.content);
-    message.author.send(`${message.content}`);
-});
+
+const commands = [
+    {
+      name: 'help',
+      description: 'Help command',
+    },
+  ];
+  
+  const rest = new REST({ version: '10' }).setToken(TOKEN);
+  
+  (async () => {
+    try {
+      console.log('Started refreshing application (/) commands.');
+  
+      await rest.put(Routes.applicationCommands(CLIENT_ID), { body: commands });
+  
+      console.log('Successfully reloaded application (/) commands.');
+    } catch (error) {
+      console.error(error);
+    }
+  })();
